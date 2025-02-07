@@ -4,6 +4,11 @@ const app = express();
 
 app.get("/assistant/greet" , (req , res)=>{
   const name = req.query.name ;
+  if (!name) {
+    return res.status(400).json({
+      error: "The 'name' query parameter is required."
+    });
+  }
   const week = ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday","Saturday"];
   const day = new Date().getDay() ;
   const currDay = week[day]
